@@ -3,6 +3,7 @@ $(document).ready(function() {
         var title = $("#title").val();
         var subtitle = $("#subtitle").val();
         var image = document.querySelector('#image');
+        var canvasImg = document.getElementById("canvasImg");
 
         if (title.length == 0 || subtitle.length == 0) return alert("내용을 모두 입력해주세요.")
 
@@ -15,8 +16,9 @@ $(document).ready(function() {
         var input = loadImage(URL.createObjectURL(fileList[0]), main);
         var form = loadImage('images/form.png', main);
         var blur = loadImage('images/blur.jpg', main);
-        canvas.style.display = "block";
-        alert("자괴감이 생성되었습니다!\n스크롤을 아래로 내려보세요.")
+        alert("자괴감이 생성되었습니다!\n스크롤을 아래로 내려보세요.");
+        canvasImg.style.display = "block";
+
 
         function main() {
             context.drawImage(blur, 0, 0);
@@ -34,6 +36,9 @@ $(document).ready(function() {
             context.fillStyle = 'white';
             context.textAlign = 'center';
             context.fillText("판사님 고양이가 만들었습니다.", 370, 705);
+
+            var dataURL = canvas.toDataURL("image/jpeg");
+            canvasImg.src = dataURL;
         }
 
         function loadImage(src, onload) {
