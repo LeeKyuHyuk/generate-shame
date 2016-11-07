@@ -1,4 +1,7 @@
 $(document).ready(function() {
+    var canvas = document.getElementById("canvas");
+    var context = canvas.getContext("2d");
+    
     $("#start").click(function() {
         var title = $("#title").val();
         var subtitle = $("#subtitle").val();
@@ -10,12 +13,11 @@ $(document).ready(function() {
         var reader = new FileReader();
         reader.readAsDataURL(fileList[0]);
 
-        var canvas = document.getElementById("canvas");
-        var context = canvas.getContext("2d");
         var input = loadImage(URL.createObjectURL(fileList[0]), main);
-        var form = loadImage('images/form.png', main);
-        var blur = loadImage('images/blur.jpg', main);
+        var form = loadImage('http://kyuhyuk.kr/generate-shame/images/form.png', main);
+        var blur = loadImage('http://kyuhyuk.kr/generate-shame/images/blur.jpg', main);
         canvas.style.display = "block";
+        document.getElementById("download").style.display = "block";
         alert("자괴감이 생성되었습니다!\n스크롤을 아래로 내려보세요.")
 
         function main() {
@@ -42,5 +44,9 @@ $(document).ready(function() {
             img.src = src;
             return img;
         }
+    })
+
+    $("#download").click(function() {
+        window.location = canvas.toDataURL();
     })
 });
